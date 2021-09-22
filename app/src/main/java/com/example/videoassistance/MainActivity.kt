@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit
 
  class MainActivity : AppCompatActivity() {
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private lateinit var videoView: VideoView
     }
 
@@ -110,7 +111,7 @@ private lateinit var mMediaPlayer : MediaPlayer
 
 
     fun runnable() {
-        var handler = Handler()
+        val handler = Handler()
 
         val r: Runnable = object : Runnable {
             @SuppressLint("DefaultLocale")
@@ -157,7 +158,7 @@ private lateinit var mMediaPlayer : MediaPlayer
                                 showQuestionDialog(5)
                             }
                         }
-                        Log.e("Main", "$time")
+                        Log.e("Main", time)
                     }
                 } catch (ex: Exception) {
                     ex.printStackTrace()
@@ -187,6 +188,7 @@ private lateinit var mMediaPlayer : MediaPlayer
         }
     }
 
+@SuppressLint("InflateParams", "SetTextI18n")
 fun showQuestionDialog(questionNo: Int){
     val view: View = layoutInflater.inflate(R.layout.question_layout, null)
     val dialog = BottomSheetDialog(this)
@@ -228,6 +230,7 @@ fun showQuestionDialog(questionNo: Int){
 
     private lateinit var mQuestion :TextView
 var feedBackQuestion = 1
+    @SuppressLint("InflateParams")
     fun showFeedBackDialog() {
         val view: View = layoutInflater.inflate(R.layout.question_layout, null)
         val dialog = BottomSheetDialog(this)
@@ -282,6 +285,7 @@ var feedBackQuestion = 1
         dialog.show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateQuestion() {
         if (feedBackQuestion == 1){
             mQuestion.text = "The course objectives were clear?"
